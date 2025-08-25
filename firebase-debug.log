@@ -1,0 +1,302 @@
+[debug] [2025-08-25T23:30:53.977Z] ----------------------------------------------------------------------
+[debug] [2025-08-25T23:30:53.982Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gaboo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-08-25T23:30:53.982Z] CLI Version:   14.14.0
+[debug] [2025-08-25T23:30:53.982Z] Platform:      win32
+[debug] [2025-08-25T23:30:53.982Z] Node Version:  v22.18.0
+[debug] [2025-08-25T23:30:53.983Z] Time:          Mon Aug 25 2025 17:30:53 GMT-0600 (hora estándar central)
+[debug] [2025-08-25T23:30:53.983Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-25T23:30:54.156Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-25T23:30:54.156Z] > authorizing via signed-in user (nexoweb50@gmail.com)
+[debug] [2025-08-25T23:30:54.156Z] [iam] checking project keyglam-ee112 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-08-25T23:30:54.157Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:54.157Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:54.158Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions [none]
+[debug] [2025-08-25T23:30:54.158Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions x-goog-quota-user=projects/keyglam-ee112
+[debug] [2025-08-25T23:30:54.158Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:30:54.487Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions 200
+[debug] [2025-08-25T23:30:54.487Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:30:54.488Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:54.488Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:54.488Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 [none]
+[debug] [2025-08-25T23:30:54.760Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 200
+[debug] [2025-08-25T23:30:54.760Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 {"projectId":"keyglam-ee112","projectNumber":"616823447813","displayName":"KeyGlam","name":"projects/keyglam-ee112","resources":{"hostingSite":"keyglam-ee112"},"state":"ACTIVE","etag":"1_9f0c61cf-8f54-403b-9ef4-df61726bca4a"}
+[debug] [2025-08-25T23:30:57.395Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:57.395Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:57.395Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites pageToken=&pageSize=10
+[debug] [2025-08-25T23:30:57.922Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:30:57.922Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:30:57.922Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:57.922Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:57.922Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 
+[debug] [2025-08-25T23:30:58.107Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:30:58.107Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:30:58.107Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:58.108Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:30:58.108Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config [none]
+[debug] [2025-08-25T23:30:58.505Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config 200
+[debug] [2025-08-25T23:30:58.505Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config {"projectId":"keyglam-ee112","appId":"1:616823447813:web:8a1d6a81867fe08f5f576c","storageBucket":"keyglam-ee112.firebasestorage.app","apiKey":"AIzaSyBGDn6rpxVSTFu-JToXNWulheNLAgm-ETQ","authDomain":"keyglam-ee112.firebaseapp.com","messagingSenderId":"616823447813"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-08-25T23:31:02.748Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:31:02.748Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:31:02.748Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 [none]
+[debug] [2025-08-25T23:31:02.895Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 200
+[debug] [2025-08-25T23:31:02.896Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 {"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.5.0
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully in 8.5s
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./app/page.tsx:43:21
+Type error: Binding element 'title' implicitly has an 'any' type.
+
+  41 |
+  42 | // --- COMPONENTES DE UI ---
+> 43 | const StatCard = ({ title, value, icon: Icon, color }) => (
+     |                     ^
+  44 |   <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
+  45 |     <div className="flex justify-between items-start">
+  46 |       <div className="flex flex-col">
+
+[info] Next.js build worker exited with code: 1 and signal: null
+
+[debug] [2025-08-25T23:31:19.747Z] Error: ENOENT: no such file or directory, open 'C:\Users\gaboo\OneDrive\Desktop\Proyectos\keyglam-app\.next\export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-08-25T23:32:55.189Z] ----------------------------------------------------------------------
+[debug] [2025-08-25T23:32:55.191Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gaboo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-08-25T23:32:55.191Z] CLI Version:   14.14.0
+[debug] [2025-08-25T23:32:55.192Z] Platform:      win32
+[debug] [2025-08-25T23:32:55.192Z] Node Version:  v22.18.0
+[debug] [2025-08-25T23:32:55.192Z] Time:          Mon Aug 25 2025 17:32:55 GMT-0600 (hora estándar central)
+[debug] [2025-08-25T23:32:55.192Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-25T23:32:55.362Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-25T23:32:55.363Z] > authorizing via signed-in user (nexoweb50@gmail.com)
+[debug] [2025-08-25T23:32:55.363Z] [iam] checking project keyglam-ee112 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-08-25T23:32:55.364Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:55.364Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:55.365Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions [none]
+[debug] [2025-08-25T23:32:55.365Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions x-goog-quota-user=projects/keyglam-ee112
+[debug] [2025-08-25T23:32:55.365Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:32:55.848Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions 200
+[debug] [2025-08-25T23:32:55.848Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:32:55.849Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:55.849Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:55.849Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 [none]
+[debug] [2025-08-25T23:32:56.252Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 200
+[debug] [2025-08-25T23:32:56.252Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 {"projectId":"keyglam-ee112","projectNumber":"616823447813","displayName":"KeyGlam","name":"projects/keyglam-ee112","resources":{"hostingSite":"keyglam-ee112"},"state":"ACTIVE","etag":"1_9f0c61cf-8f54-403b-9ef4-df61726bca4a"}
+[debug] [2025-08-25T23:32:57.968Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:57.968Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:57.968Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites pageToken=&pageSize=10
+[debug] [2025-08-25T23:32:58.652Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:32:58.652Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:32:58.653Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:58.653Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:58.653Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 
+[debug] [2025-08-25T23:32:58.838Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:32:58.839Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:32:58.839Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:58.840Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:32:58.840Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config [none]
+[debug] [2025-08-25T23:32:59.251Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config 200
+[debug] [2025-08-25T23:32:59.251Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config {"projectId":"keyglam-ee112","appId":"1:616823447813:web:8a1d6a81867fe08f5f576c","storageBucket":"keyglam-ee112.firebasestorage.app","apiKey":"AIzaSyBGDn6rpxVSTFu-JToXNWulheNLAgm-ETQ","authDomain":"keyglam-ee112.firebaseapp.com","messagingSenderId":"616823447813"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-08-25T23:33:03.581Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:33:03.581Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:33:03.582Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 [none]
+[debug] [2025-08-25T23:33:03.731Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 200
+[debug] [2025-08-25T23:33:03.731Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 {"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.5.0
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully in 1773ms
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+Failed to compile.
+
+./app/clientes/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:98  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:108  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/deudas/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:46  Warning: 'DollarSign' is defined but never used.  @typescript-eslint/no-unused-vars
+4:58  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+17:14  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/inventario/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:80  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:90  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:58  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:71  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/reportes/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:46  Warning: 'DollarSign' is defined but never used.  @typescript-eslint/no-unused-vars
+4:58  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:68  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/ventas/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:112  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:122  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+[debug] [2025-08-25T23:33:12.170Z] Error: ENOENT: no such file or directory, open 'C:\Users\gaboo\OneDrive\Desktop\Proyectos\keyglam-app\.next\export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-08-25T23:36:41.620Z] ----------------------------------------------------------------------
+[debug] [2025-08-25T23:36:41.625Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\gaboo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-08-25T23:36:41.625Z] CLI Version:   14.14.0
+[debug] [2025-08-25T23:36:41.625Z] Platform:      win32
+[debug] [2025-08-25T23:36:41.625Z] Node Version:  v22.18.0
+[debug] [2025-08-25T23:36:41.626Z] Time:          Mon Aug 25 2025 17:36:41 GMT-0600 (hora estándar central)
+[debug] [2025-08-25T23:36:41.626Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-25T23:36:41.800Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-25T23:36:41.800Z] > authorizing via signed-in user (nexoweb50@gmail.com)
+[debug] [2025-08-25T23:36:41.800Z] [iam] checking project keyglam-ee112 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-08-25T23:36:41.801Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:41.801Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:41.802Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions [none]
+[debug] [2025-08-25T23:36:41.802Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions x-goog-quota-user=projects/keyglam-ee112
+[debug] [2025-08-25T23:36:41.803Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:36:42.158Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions 200
+[debug] [2025-08-25T23:36:42.158Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/keyglam-ee112:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-08-25T23:36:42.158Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:42.158Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:42.158Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 [none]
+[debug] [2025-08-25T23:36:42.583Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 200
+[debug] [2025-08-25T23:36:42.583Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112 {"projectId":"keyglam-ee112","projectNumber":"616823447813","displayName":"KeyGlam","name":"projects/keyglam-ee112","resources":{"hostingSite":"keyglam-ee112"},"state":"ACTIVE","etag":"1_9f0c61cf-8f54-403b-9ef4-df61726bca4a"}
+[debug] [2025-08-25T23:36:44.301Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:44.301Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:44.301Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites pageToken=&pageSize=10
+[debug] [2025-08-25T23:36:44.817Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:36:44.818Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:36:44.820Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:44.820Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:44.820Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 
+[debug] [2025-08-25T23:36:45.019Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites 200
+[debug] [2025-08-25T23:36:45.019Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites {"sites":[{"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-08-25T23:36:45.019Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:45.019Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:45.020Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config [none]
+[debug] [2025-08-25T23:36:45.395Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config 200
+[debug] [2025-08-25T23:36:45.395Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/keyglam-ee112/webApps/-/config {"projectId":"keyglam-ee112","appId":"1:616823447813:web:8a1d6a81867fe08f5f576c","storageBucket":"keyglam-ee112.firebasestorage.app","apiKey":"AIzaSyBGDn6rpxVSTFu-JToXNWulheNLAgm-ETQ","authDomain":"keyglam-ee112.firebaseapp.com","messagingSenderId":"616823447813"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 15.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-08-25T23:36:49.693Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:49.693Z] Checked if tokens are valid: true, expires at: 1756166691855
+[debug] [2025-08-25T23:36:49.693Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 [none]
+[debug] [2025-08-25T23:36:49.842Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 200
+[debug] [2025-08-25T23:36:49.842Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/keyglam-ee112/sites/keyglam-ee112 {"name":"projects/keyglam-ee112/sites/keyglam-ee112","defaultUrl":"https://keyglam-ee112.web.app","type":"DEFAULT_SITE"}
+[info]    ▲ Next.js 15.5.0
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully in 2.6s
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+./app/clientes/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+4:16  Warning: 'Package' is defined but never used.  @typescript-eslint/no-unused-vars
+4:25  Warning: 'ShoppingCart' is defined but never used.  @typescript-eslint/no-unused-vars
+4:39  Warning: 'Users' is defined but never used.  @typescript-eslint/no-unused-vars
+4:98  Warning: 'FileText' is defined but never used.  @typescript-eslint/no-unused-vars
+4:108  Warning: 'Calendar' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/page.tsx
+4:10  Warning: 'Home' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+
+[info] Failed to compile.
+
+
+[info] ./app/page.tsx:43:21
+Type error: Binding element 'title' implicitly has an 'any' type.
+
+  41 |
+  42 | // --- COMPONENTES DE UI ---
+> 43 | const StatCard = ({ title, value, icon: Icon, color }) => (
+     |                     ^
+  44 |   <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
+  45 |     <div className="flex justify-between items-start">
+  46 |       <div className="flex flex-col">
+
+[info] Next.js build worker exited with code: 1 and signal: null
+
+[debug] [2025-08-25T23:37:00.026Z] Error: ENOENT: no such file or directory, open 'C:\Users\gaboo\OneDrive\Desktop\Proyectos\keyglam-app\.next\export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
