@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Home, Package, ShoppingCart, Users, DollarSign,X } from 'lucide-react';
-import { db } from './lib/firebase';
+import { Package, ShoppingCart, Users, DollarSign, X } from 'lucide-react';
+import { db } from './lib/firebase'; // Corregido: Ruta de importación
 import { collection, onSnapshot, query, orderBy, Timestamp } from 'firebase/firestore';
-import Sidebar from '../components/Sidebar'
+import Sidebar from '@/components/Sidebar';
 
 // --- TIPOS DE DATOS ---
 interface Sale {
@@ -39,8 +39,31 @@ interface Stats {
   monthlySales: number;
 }
 
-// --- COMPONENTES DE UI ---
-const StatCard = ({ title, value, icon: Icon, color }) => (
+// --- TIPOS PARA PROPS DE COMPONENTES ---
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  icon: React.ElementType;
+  color: string;
+}
+
+interface RecentSalesTableProps {
+  sales: Sale[];
+}
+
+interface TopProductsListProps {
+  products: TopProduct[];
+}
+
+interface LowStockModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  products: Product[];
+}
+
+
+// --- COMPONENTES DE UI (CON TIPOS CORREGIDOS) ---
+const StatCard = ({ title, value, icon: Icon, color }: StatCardProps) => (
   <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300 h-full">
     <div className="flex justify-between items-start">
       <div className="flex flex-col">
@@ -54,7 +77,7 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
   </div>
 );
 
-const RecentSalesTable = ({ sales }) => (
+const RecentSalesTable = ({ sales }: RecentSalesTableProps) => (
     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
         <h3 className="font-bold text-lg text-gray-800 mb-4">Ventas Recientes</h3>
         <div className="overflow-x-auto">
@@ -93,7 +116,7 @@ const RecentSalesTable = ({ sales }) => (
     </div>
 );
 
-const TopProductsList = ({ products }) => (
+const TopProductsList = ({ products }: TopProductsListProps) => (
     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
         <h3 className="font-bold text-lg text-gray-800 mb-4">Productos Más Vendidos (este mes)</h3>
         <ul className="space-y-4">
@@ -113,7 +136,7 @@ const TopProductsList = ({ products }) => (
     </div>
 );
 
-const LowStockModal = ({ isOpen, onClose, products }) => {
+const LowStockModal = ({ isOpen, onClose, products }: LowStockModalProps) => {
     if (!isOpen) return null;
 
     return (
@@ -191,10 +214,12 @@ export default function HomePage() {
       setRecentSales(salesData.slice(0, 5));
 
       const monthlySalesData = salesData.filter(s => s.createdAt.toDate() >= startOfMonth);
+      
+      // **CORRECCIÓN AQUÍ: Se añade el tipo explícito al objeto inicial de reduce**
       const productCounts = monthlySalesData.flatMap(s => s.items).reduce((acc, item) => {
         acc[item.productName] = (acc[item.productName] || 0) + item.quantity;
         return acc;
-      }, {});
+      }, {} as { [key: string]: number });
       
       const sortedProducts = Object.entries(productCounts)
         .sort(([, a], [, b]) => (b as number) - (a as number))
