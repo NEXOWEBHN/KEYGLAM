@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import {Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, query, where, getDocs, orderBy, Timestamp } from 'firebase/firestore';
 import Sidebar from '@/components/Sidebar';
@@ -25,15 +25,17 @@ interface SalesReportData {
   sales: Sale[];
 }
 
+interface DebtByClient {
+  clientName: string;
+  clientId: string;
+  totalOwed: number;
+  salesCount: number;
+}
+
 interface DebtsReportData {
   totalDebt: number;
   clientsInDebtCount: number;
-  debtsByClient: {
-    clientName: string;
-    clientId: string;
-    totalOwed: number;
-    salesCount: number;
-  }[];
+  debtsByClient: DebtByClient[];
 }
 
 // --- COMPONENTE PRINCIPAL ---
@@ -46,7 +48,7 @@ export default function ReportsPage() {
   const [debtSearchQuery, setDebtSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const generateSalesReport = async (start, end) => {
+  const generateSalesReport = async (start: Date, end: Date) => {
     const salesRef = collection(db, 'sales');
     const q = query(
       salesRef,
@@ -58,18 +60,21 @@ export default function ReportsPage() {
     const salesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Sale));
 
     const totalRevenue = salesData.reduce((sum, sale) => sum + sale.total, 0);
+    
+    // **CORRECCIÓN AQUÍ**
     const productCounts = salesData.flatMap(s => s.items).reduce((acc, item) => {
       acc[item.productName] = (acc[item.productName] || 0) + item.quantity;
       return acc;
-    }, {});
-    const topProductEntry = Object.entries(productCounts).sort(([, a], [, b]) => (b as number) - (a as number))[0];
-    const topProduct = topProductEntry ? { name: topProductEntry[0], sold: topProductEntry[1] as number } : null;
+    }, {} as { [key: string]: number });
+
+    const topProductEntry = Object.entries(productCounts).sort(([, a], [, b]) => b - a)[0];
+    const topProduct = topProductEntry ? { name: topProductEntry[0], sold: topProductEntry[1] } : null;
 
     setSalesReport({ totalRevenue, numberOfSales: salesData.length, topProduct, sales: salesData });
     setDebtsReport(null);
   };
 
-  const generateDebtsReport = async (start, end) => {
+  const generateDebtsReport = async (start: Date, end: Date) => {
     const salesRef = collection(db, 'sales');
     const q = query(
       salesRef,
@@ -80,6 +85,7 @@ export default function ReportsPage() {
     const querySnapshot = await getDocs(q);
     const debtSales = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Sale));
 
+    // **CORRECCIÓN AQUÍ**
     const debtsByClient = debtSales.reduce((acc, sale) => {
       const debtAmount = sale.total - sale.amountPaid;
       if (!acc[sale.clientId]) {
@@ -93,7 +99,7 @@ export default function ReportsPage() {
       acc[sale.clientId].totalOwed += debtAmount;
       acc[sale.clientId].salesCount += 1;
       return acc;
-    }, {});
+    }, {} as { [key: string]: DebtByClient });
 
     const totalDebt = Object.values(debtsByClient).reduce((sum, client) => sum + client.totalOwed, 0);
     
