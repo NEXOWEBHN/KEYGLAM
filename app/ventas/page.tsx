@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import {Search, X, Plus, Minus, UserPlus, Trash2, CreditCard, DollarSign} from 'lucide-react';
+// **CORRECCIÓN: Se limpiaron los íconos no utilizados**
+import { Search, X, Plus, Minus, UserPlus, Trash2, CreditCard, DollarSign } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, onSnapshot, QuerySnapshot, DocumentData, addDoc, doc, runTransaction } from 'firebase/firestore';
 import Sidebar from '@/components/Sidebar';
@@ -28,12 +29,10 @@ interface CartItem extends Product {
 
 // --- COMPONENTE PRINCIPAL DE LA PÁGINA DE VENTAS (POS) ---
 export default function POSPage() {
-  // Estados de datos
   const [products, setProducts] = useState<Product[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   
-  // Estados de UI
   const [productSearch, setProductSearch] = useState('');
   const [clientSearch, setClientSearch] = useState('');
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
@@ -41,8 +40,6 @@ export default function POSPage() {
   const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState(false);
   const [newClientData, setNewClientData] = useState({ name: '', phone: '', email: '' });
 
-
-  // --- EFECTOS PARA CARGAR DATOS DE FIREBASE ---
   useEffect(() => {
     const productsUnsub = onSnapshot(collection(db, 'products'), (snapshot: QuerySnapshot<DocumentData>) => {
       setProducts(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Product)));
@@ -56,7 +53,6 @@ export default function POSPage() {
     };
   }, []);
 
-  // --- LÓGICA DEL CARRITO ---
   const addToCart = (product: Product) => {
     if (product.stock <= 0) {
         alert("Este producto no tiene stock disponible.");
@@ -95,7 +91,6 @@ export default function POSPage() {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }, [cart]);
 
-  // --- LÓGICA DE CLIENTES ---
   const handleCreateClient = async (e: React.FormEvent) => {
     e.preventDefault();
     if (newClientData.name.trim() === '' || newClientData.phone.trim() === '') {
@@ -103,11 +98,10 @@ export default function POSPage() {
       return;
     }
     try {
-      // **CORRECCIÓN AQUÍ: Añadimos el campo createdAt**
       const clientPayload = { ...newClientData, createdAt: new Date() };
       const docRef = await addDoc(collection(db, 'clients'), clientPayload);
       
-      setSelectedClient({ id: docRef.id, ...clientPayload });
+      setSelectedClient({ id: docRef.id, ...newClientData });
       setIsCreateClientModalOpen(false);
       setNewClientData({ name: '', phone: '', email: '' });
     } catch (error) {
@@ -116,7 +110,6 @@ export default function POSPage() {
     }
   };
 
-  // --- LÓGICA DE VENTA ---
   const handleCompleteSale = async (status: 'Pagado' | 'Pendiente') => {
     if (cart.length === 0) {
       alert("El carrito está vacío.");
@@ -128,6 +121,35 @@ export default function POSPage() {
     }
     try {
       await runTransaction(db, async (transaction) => {
+        const productRefsAndData = cart.map(item => ({
+          ref: doc(db, 'products', item.id),
+          cartItem: item,
+        }));
+
+        const productDocs = await Promise.all(
+          productRefsAndData.map(item => transaction.get(item.ref))
+        );
+
+        // **CORRECCIÓN AQUÍ: Se combinan la validación y la actualización en un solo bucle**
+        for (let i = 0; i < productDocs.length; i++) {
+          const productDoc = productDocs[i];
+          const { cartItem } = productRefsAndData[i];
+
+          if (!productDoc.exists()) {
+            throw new Error(`El producto "${cartItem.name}" ya no existe.`);
+          }
+
+          const currentStock = productDoc.data().stock;
+          if (currentStock < cartItem.quantity) {
+            throw new Error(`Stock insuficiente para "${cartItem.name}". Solo quedan ${currentStock}.`);
+          }
+          
+          // Se calcula y se actualiza el stock en el mismo bucle
+          const newStock = currentStock - cartItem.quantity;
+          transaction.update(productDoc.ref, { stock: newStock });
+        }
+        
+        const newSaleRef = doc(collection(db, 'sales'));
         const saleData = {
           clientId: selectedClient.id,
           clientName: selectedClient.name,
@@ -142,24 +164,19 @@ export default function POSPage() {
           amountPaid: status === 'Pagado' ? cartTotal : 0,
           createdAt: new Date(),
         };
-        const salesCollectionRef = collection(db, 'sales');
-        addDoc(salesCollectionRef, saleData);
-        for (const item of cart) {
-          const productRef = doc(db, 'products', item.id);
-          const productDoc = await transaction.get(productRef);
-          if (!productDoc.exists()) throw "El producto no existe!";
-          const newStock = productDoc.data().stock - item.quantity;
-          transaction.update(productRef, { stock: newStock });
-        }
+        
+        transaction.set(newSaleRef, saleData);
       });
+      
       setCart([]);
       setSelectedClient(null);
       setClientSearch('');
       setProductSearch('');
       alert(`¡Venta completada como "${status}"!`);
+
     } catch (error) {
       console.error("Error al completar la venta: ", error);
-      alert("Hubo un error al procesar la venta. El stock no ha sido modificado.");
+      alert((error as Error).message || "Hubo un error al procesar la venta. El Stock no ha sido modificado.");
     }
   };
 
@@ -183,7 +200,7 @@ export default function POSPage() {
             />
           </div>
           <div className="flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pr-2">
-            {filteredProducts.map(product => (
+            {products.map(product => (
               <div 
                 key={product.id} 
                 onClick={() => addToCart(product)} 
