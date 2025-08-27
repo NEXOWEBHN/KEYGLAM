@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-// **CORRECCIÓN: Se limpiaron los íconos no utilizados**
-import { Search, X, Plus, Minus, UserPlus, Trash2, CreditCard, DollarSign } from 'lucide-react';
+import { Search, X, Plus, Minus, UserPlus, Trash2, CreditCard, DollarSign, ChevronLeft, ChevronRight } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { collection, onSnapshot, QuerySnapshot, DocumentData, addDoc, doc, runTransaction } from 'firebase/firestore';
 import Sidebar from '@/components/Sidebar';
@@ -27,6 +26,41 @@ interface CartItem extends Product {
   quantity: number;
 }
 
+// --- TIPOS PARA PROPS ---
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+// --- COMPONENTE DE PAGINACIÓN (CON TIPOS CORREGIDOS) ---
+const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+  if (totalPages <= 1) return null;
+
+  return (
+    <div className="flex items-center justify-center space-x-2 mt-4">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className="p-2 rounded-lg bg-white border disabled:opacity-50"
+      >
+        <ChevronLeft size={20} />
+      </button>
+      <span className="font-medium text-gray-600">
+        Página {currentPage} de {totalPages}
+      </span>
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className="p-2 rounded-lg bg-white border disabled:opacity-50"
+      >
+        <ChevronRight size={20} />
+      </button>
+    </div>
+  );
+};
+
+
 // --- COMPONENTE PRINCIPAL DE LA PÁGINA DE VENTAS (POS) ---
 export default function POSPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -39,6 +73,10 @@ export default function POSPage() {
   const [isSelectClientModalOpen, setIsSelectClientModalOpen] = useState(false);
   const [isCreateClientModalOpen, setIsCreateClientModalOpen] = useState(false);
   const [newClientData, setNewClientData] = useState({ name: '', phone: '', email: '' });
+  
+  // Estado para la paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   useEffect(() => {
     const productsUnsub = onSnapshot(collection(db, 'products'), (snapshot: QuerySnapshot<DocumentData>) => {
@@ -52,6 +90,24 @@ export default function POSPage() {
       clientsUnsub();
     };
   }, []);
+
+  // Lógica de filtrado y paginación
+  const filteredProducts = useMemo(() => 
+    products.filter(p => p.name.toLowerCase().includes(productSearch.toLowerCase()))
+  , [products, productSearch]);
+
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredProducts, currentPage]);
+
+  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+
+  // Resetear a la página 1 cuando se busca
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [productSearch]);
+
 
   const addToCart = (product: Product) => {
     if (product.stock <= 0) {
@@ -130,7 +186,6 @@ export default function POSPage() {
           productRefsAndData.map(item => transaction.get(item.ref))
         );
 
-        // **CORRECCIÓN AQUÍ: Se combinan la validación y la actualización en un solo bucle**
         for (let i = 0; i < productDocs.length; i++) {
           const productDoc = productDocs[i];
           const { cartItem } = productRefsAndData[i];
@@ -144,7 +199,6 @@ export default function POSPage() {
             throw new Error(`Stock insuficiente para "${cartItem.name}". Solo quedan ${currentStock}.`);
           }
           
-          // Se calcula y se actualiza el stock en el mismo bucle
           const newStock = currentStock - cartItem.quantity;
           transaction.update(productDoc.ref, { stock: newStock });
         }
@@ -180,7 +234,6 @@ export default function POSPage() {
     }
   };
 
-  const filteredProducts = products.filter(p => p.name.toLowerCase().includes(productSearch.toLowerCase()));
   const filteredClients = clients.filter(c => c.name.toLowerCase().includes(clientSearch.toLowerCase()));
 
   return (
@@ -199,8 +252,8 @@ export default function POSPage() {
               className="w-full p-3 pl-10 border rounded-lg"
             />
           </div>
-          <div className="flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pr-2">
-            {products.map(product => (
+          <div className="flex-1 overflow-y-auto grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 pr-2">
+            {paginatedProducts.map(product => (
               <div 
                 key={product.id} 
                 onClick={() => addToCart(product)} 
@@ -224,6 +277,7 @@ export default function POSPage() {
               </div>
             ))}
           </div>
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
         </div>
 
         <div className="w-2/5 bg-white border-l p-6 flex flex-col">
